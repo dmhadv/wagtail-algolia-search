@@ -6,9 +6,9 @@ authors = ["Mitchel Cabuloy <mitchel.cabuloy@torchbox.com>"]
 license = "BSD"
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
+python = "^3.11.2"
 Django = ">=2.2,<4.0"
-wagtail = ">=2.11,<3"
+wagtail = ">=4.1,<4.2"
 algoliasearch = "^2.5.0"
 
 [tool.poetry.dev-dependencies]

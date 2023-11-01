@@ -75,6 +75,7 @@ USE_L10N = True
 USE_TZ = True
 
 WAGTAIL_I18N_ENABLED = True
+WAGTAILADMIN_BASE_URL = 'localhost'
 
 LANGUAGES = WAGTAIL_CONTENT_LANGUAGES = (
     ("en", "English"),
