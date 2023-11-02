@@ -83,7 +83,8 @@ class ObjectIndexer:
                         if len(str(doc)) + len(str(val)) > 9500:
                             docs.append(doc)
                             doc = self.create_base_document(obj, len(docs))
-                            doc[self.get_field_key(model, current_field)][current_field.field_name].append(val)
+                            doc[self.get_field_key(model, current_field)][current_field.field_name] = []
+                        doc[self.get_field_key(model, current_field)][current_field.field_name].append(val)
                 else:
                     if len(str(doc)) + len(str(value)) > 9500:
                         docs.append(doc)
