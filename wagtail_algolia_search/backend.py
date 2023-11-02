@@ -77,7 +77,7 @@ class ObjectIndexer:
 
         for field in model.get_search_fields():
             for current_field, value in self.prepare_field(obj, field):
-                if is_instance(value, list):
+                if isinstance(value, list):
                     doc[self.get_field_key(model, current_field)][current_field.field_name] = []
                     for val in value:
                         if len(str(doc)) + len(str(val)) > 9500:
@@ -239,7 +239,8 @@ class AlgoliaSearchResults(BaseSearchResults):
 
         for hit in results["hits"]:
             try:
-                result_model_name, pk = hit["wagtail_object_id"].split(":")
+                print(hit)
+                result_model_name, pk = hit["wagtail_obj_id"].split(":")
                 result_model = apps.get_model(result_model_name)
                 if issubclass(result_model, model):
                     pks.append(pk)
@@ -284,9 +285,9 @@ class AlgoliaSearchResults(BaseSearchResults):
             query.values(field_name).annotate(count=Count("pk")).order_by("-count")
         )
 
-        return OrderedDict(
+        return OrderedDict[
             [(result[field_name], result["count"]) for result in results]
-        )
+        ]
 
 
 class AlgoliaIndex:

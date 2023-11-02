@@ -38,14 +38,14 @@ class TestAlgoliaSearchBackend(TestCase):
         blog_page_doc = index.save_objects.call_args_list[1][0][0][0]
 
         # Check index page
-        self.assertEqual(blog_index_doc["objectID"], f"tests.BlogIndex:{blog_index.pk}")
+        self.assertEqual(blog_index_doc["wagtail_obj_id"], f"tests.BlogIndex:{blog_index.pk}")
         self.assertEqual(blog_index_doc["wagtailcore__Page"]["title"], blog_index.title)
         self.assertTrue(blog_index_doc["wagtail_managed"])
         self.assertEqual(blog_index_doc["locale"], "en")
         self.assertEqual(blog_index_doc["model"], "tests.BlogIndex")
 
         # Check blog page
-        self.assertEqual(blog_page_doc["objectID"], f"tests.BlogPage:{blog_page.pk}")
+        self.assertEqual(blog_page_doc["wagtail_obj_id"], f"tests.BlogPage:{blog_page.pk}")
         self.assertEqual(blog_page_doc["wagtailcore__Page"]["title"], blog_page.title)
         self.assertTrue(blog_page_doc["wagtail_managed"])
         self.assertEqual(
@@ -77,7 +77,7 @@ class TestAlgoliaSearchBackend(TestCase):
         index.search.return_value = {
             "hits": [
                 {
-                    "objectID": f"tests.BlogPage:{first_blog_page.pk}",
+                    "wagtail_obj_id": f"tests.BlogPage:{first_blog_page.pk}",
                 }
             ],
             "nbHits": 1,
@@ -94,7 +94,7 @@ class TestAlgoliaSearchBackend(TestCase):
             "Apples",
             {
                 "filters": "wagtail_managed:true",
-                "attributesToRetrieve": ["objectID"],
+                "attributesToRetrieve": ["wagtail_obj_id"],
                 "attributesToHighlight": [],
             },
         )
@@ -162,6 +162,7 @@ class TestAlgoliaSearchBackend(TestCase):
                     "filterOnly(wagtailcore__Page.translation_key)",
                     "filterOnly(tests__BlogPage.is_featured)",
                 ],
+                "attributeForDistinct": "wagtail_obj_id"
             }
         )
 
@@ -184,10 +185,10 @@ class TestAlgoliaSearchBackend(TestCase):
         index.search.return_value = {
             "hits": [
                 {
-                    "objectID": f"tests.BlogPage:{first_blog_page.pk}",
+                    "wagtail_obj_id": f"tests.BlogPage:{first_blog_page.pk}",
                 },
                 {
-                    "objectID": f"tests.BlogPage:{second_blog_page.pk}",
+                    "wagtail_obj_id": f"tests.BlogPage:{second_blog_page.pk}",
                 },
             ],
             "nbHits": 2,
