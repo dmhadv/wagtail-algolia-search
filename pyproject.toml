@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "wagtail-algolia-search"
-version = "0.2.2"
+version = "0.2.3"
 description = "Algolia Search backend for Wagtail"
 authors = ["Mitchel Cabuloy <mitchel.cabuloy@torchbox.com>"]
 license = "BSD"
 
 [tool.poetry.dependencies]
-python = "^3.11.2"
+python = ">=3.9,<3.12"
 Django = ">=2.2,<4.0"
 wagtail = ">=4.1,<4.2"
 algoliasearch = "^2.5.0"
